@@ -1,6 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define NON 0
+#define OUI 1
+
 typedef struct coordonnee {
     unsigned int num_ligne,num_col;
-    } Coordonnee;
+} Coordonnee;
 
 
 typedef
@@ -22,11 +29,6 @@ typedef struct file {
     Element * queue; // dernier élément de la file
 } File;
 
-
-File initialiseFile();
-void ajouteSommetDansFile(Sommet *sommet, File *f);
-
-
 typedef
 struct labyrinthe
 {
@@ -43,6 +45,18 @@ struct labyrinthe
 
 } Labyrinthe;
 
+/********************* Fonctions liées aux files **********************/
+File initialiseFile();
+void ajouteSommetDansFile(Sommet *sommet, File *f);
+int isFileVide(File * f);
 
+/******************** Fonctions liées aux graphes *********************/
 void parcoursGrapheEnLargeur(Labyrinthe leLabyrinthe);
 int sommetsEquals(Sommet sommet1, Sommet sommet2);
+Sommet iSuccesseur(Sommet Graphe[], Sommet leSommet, int i);
+void ajouteSommetDansMarque(Sommet marque[], Sommet aAjouter,
+							int indiceAjout, int tailleMax );
+int sommetPresentDansMarque(Sommet marque[], Sommet aComparer,
+							int indiceMaximum, int tailleMax);
+
+

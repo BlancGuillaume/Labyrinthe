@@ -2,6 +2,7 @@
 
 /**
  * Initialise la file
+ *
  * @author Guillaume Blanc
  */
  File initialiseFile()
@@ -12,22 +13,21 @@
 
  /**
   * Ajoute un element à la file
+  *
   * @author Guillaume Blanc && Romain Daguet
   */
-  void ajouteSommetDansFile(Sommet *sommet, file *f)
+  void ajouteSommetDansFile(Sommet *sommet, File *f)
   {
-      if ((sommet != null)&&(f != null))
+      if ((sommet != null) && (f != null))
       {
           // Création de l'élément à ajouter
           Element toAdd;
-
-          // malloc
-
+          toAdd = malloc (sizeof(Element));
 
           // On ajoute le sommet dans l'élement
-          toAdd.sommet=sommet;
+          toAdd.sommet = sommet;
           // On fait pointer l'élément crée sur la queue de la file
-          toAdd.suivant=f.queue;
+          toAdd.suivant = f.queue;
           // On définit l'élément comme la nouvelle queue de la file
           f.queue = toAdd;
       }
@@ -35,12 +35,22 @@
 
   /**
    * Retire un élément de la file
+   *
    * @author Guillaume Blanc && Romain Daguet
    */
-   Sommet retireElementFile(file * f)
+   Sommet retireElementFile(File * f)
    {
        Element * elementARetirer = f->tete;
        f->tete = f->tete->suivant;
-       free(ellementARetirer)
+       free(elementARetirer);
 
+   }
+
+   /**
+    * Détermine si la file est vide
+    */
+   int isFileVide(File * f)
+   {
+	   //TODO : Faire le test
+	   return OUI; // BOUCHON
    }
