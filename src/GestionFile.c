@@ -19,19 +19,19 @@
   *
   * @author Guillaume Blanc && Romain Daguet
   */
-  void ajouteSommetDansFile(Sommet *sommet, File *f)
+  void ajouteSommetDansFile(Sommet sommet, File *f)
   {
-      if ((sommet != NULL) && (f != NULL))
+      if (f != NULL)
       {
           // Création de l'élément à ajouter
-          Element *toAdd  = (Element *)malloc(sizeof(Element));
+          Element toAdd  = malloc(sizeof(Element));
 
           // On ajoute le sommet dans l'élement
-          toAdd->sommet = *sommet;
+          toAdd.sommet = sommet;
           // On fait pointer l'élément crée sur la queue de la file
-          toAdd->suivant = f->queue;
+          toAdd.suivant = f->queue;
           // On définit l'élément comme la nouvelle queue de la file
-          f->queue = toAdd;
+          f->queue = &toAdd;
       }
   }
 
@@ -55,7 +55,7 @@
     *
     * @author Guillaume Blanc
     */
-   int isFileVide(File * f)
+   int isFileVide(File f)
    {
-	   return (f->queue == NULL && f->tete == NULL ? OUI : NON);
+	   return (f.queue == NULL && f.tete == NULL ? OUI : NON);
    }

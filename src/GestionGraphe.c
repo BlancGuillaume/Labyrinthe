@@ -31,9 +31,9 @@ void parcoursGrapheEnLargeur(Labyrinthe leLabyrinthe)
     marque[0] = depart ;
 
     File file = initialiseFile();
-    ajouteSommetDansFile(&depart, &file);
+    ajouteSommetDansFile(depart, &file);
 
-    while (    (isFileVide(&file) != OUI)
+    while (    (isFileVide(file) != OUI)
     		&& (sortieTrouvee != OUI))
     {
         v = retireElementFile(&file);
@@ -50,11 +50,11 @@ void parcoursGrapheEnLargeur(Labyrinthe leLabyrinthe)
                 if (sommetPresentDansMarque(marque, u, nbSommetDansMarque,
                 		                    tailleMax) == NON)
                 {
-                    ajouteSommetDansMarque(marque, u, nbSommetDansMarque, tailleMax);
+                    ajouteSommetDansMarque(&marque, u, nbSommetDansMarque, tailleMax);
                     // Mise à jour du nombre de sommets dans Marque
                     nbSommetDansMarque++;
 
-                    ajouteSommetDansFile(&u, &file);
+                    ajouteSommetDansFile(u, &file);
                     u.predecesseur = &v;
                 }
             }
@@ -98,8 +98,7 @@ Sommet iSuccesseur(Sommet Graphe[], Sommet leSommet, int i)
 	int indiceParcoursGraphe = 0;
 
 	do {
-		if (sommetsEquals( Graphe[indiceParcoursGraphe].coordonneeCase,
-		                   leSommet.coordonneeCase))
+		if (sommetsEquals( Graphe[indiceParcoursGraphe], leSommet))
 		{
 			// Les 2 sommets sont égaux => On peut trouver le ième successeur
 			// i-1 pour gérer le fait que l'on commence à 1
@@ -124,7 +123,7 @@ Sommet iSuccesseur(Sommet Graphe[], Sommet leSommet, int i)
  *
  * @author Guillaume Blanc
  */
-void ajouteSommetDansMarque(Sommet marque[], Sommet aAjouter,
+void ajouteSommetDansMarque(Sommet * marque[], Sommet aAjouter,
 		                    int indiceAjout, int tailleMax )
 {
 	if (indiceAjout > -1 && indiceAjout < tailleMax)
@@ -160,8 +159,7 @@ int sommetPresentDansMarque(Sommet marque[], Sommet aComparer,
 
 			do
 			{
-				if (sommetsEquals(marque[indiceParcoursMarque].coordonneeCase,
-						          aComparer.coordonneeCase) == OUI)
+				if (sommetsEquals(marque[indiceParcoursMarque], aComparer) == OUI)
 				{
 					estPresent = OUI;
 				}
@@ -191,10 +189,13 @@ int degreExt(Sommet leSommet)
 	int indiceParcoursSuccesseurs = 0;
 	int nombreDeSuccesseurs = 0; // <==> degrExt
 
-	// Parcours du tableau de successeur du sommet tant qu'il y a un successeur
+	// Parcours du tableau de successeur du sommet
 	do {
-		nombreDeSuccesseurs++;
-	} while(leSommet.successeur[indiceParcoursSuccesseurs] != NULL);
+		if (leSommet.successeur[indiceParcoursSuccesseurs] != NULL)
+		{
+			nombreDeSuccesseurs++;
+		}
+	} while(leSommet.successeur[indiceParcoursSuccesseurs] < 4);
 
 	return nombreDeSuccesseurs;
 }
