@@ -19,15 +19,15 @@
   *
   * @author Guillaume Blanc && Romain Daguet
   */
-  void ajouteSommetDansFile(Sommet sommet, File *f)
+  void ajouteSommetDansFile(Sommet som, File *f)
   {
       if (f != NULL)
       {
           // Création de l'élément à ajouter
-          Element toAdd  = malloc(sizeof(Element));
+          Element toAdd;
 
           // On ajoute le sommet dans l'élement
-          toAdd.sommet = sommet;
+          toAdd.sommet = som;
           // On fait pointer l'élément crée sur la queue de la file
           toAdd.suivant = f->queue;
           // On définit l'élément comme la nouvelle queue de la file

@@ -103,7 +103,7 @@ Sommet iSuccesseur(Sommet Graphe[], Sommet leSommet, int i)
 			// Les 2 sommets sont égaux => On peut trouver le ième successeur
 			// i-1 pour gérer le fait que l'on commence à 1
 			// dans le for de parcoursGrapheEnLargeur
-			sommetRenvoye = Graphe[indiceParcoursGraphe].successeur[i-1];
+			sommetRenvoye = *Graphe[indiceParcoursGraphe].successeur[i-1];
 			sommetTrouve = OUI;
 		}
 		indiceParcoursGraphe++;
@@ -128,13 +128,13 @@ void ajouteSommetDansMarque(Sommet * marque[], Sommet aAjouter,
 {
 	if (indiceAjout > -1 && indiceAjout < tailleMax)
 	{
-		marque[indiceAjout] = aAjouter;
+		marque[indiceAjout] = &aAjouter;
 	}
 	else
 	{
 		// Ca ne devrait jamais arriver mais bon ...
-		printf("Ajout du sommet impossible l'indice d'ajout dans marque donné "
-			   " est soit négatif soit supérieure à la taille maximum");
+		printf("Ajout du sommet impossible l'indice d'ajout dans marque donne "
+			   " est soit negatif soit superieure a la taille maximum");
 	}
 }
 
@@ -169,8 +169,8 @@ int sommetPresentDansMarque(Sommet marque[], Sommet aComparer,
 	else
 	{
 			// Ca ne devrait jamais arriver mais bon ...
-			printf("Comparaison impossible l'indice maximum donné "
-				   " est soit négatif soit supérieure à la taille maximum");
+			printf("Comparaison impossible l'indice maximum donne "
+				   " est soit negatif soit superieure a la taille maximum");
 	}
 
 	return estPresent;

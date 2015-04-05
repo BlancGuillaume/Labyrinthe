@@ -13,11 +13,11 @@
  *
  * Le graphe est un tableau de sommets de taille=(nb_lignes * nb_colonnes)
  *
- * TO DO : Malloc foireux + remplir les successeurs.
+ * @Author : Romain Daguet
 */
 void successeurs (Labyrinthe Laby, Sommet *sommet){
     
-    if (sommet->coordonneesCase.colonne+1 <= Laby.nb_colonne) {
+    if (sommet->coordonneeCase.num_col+1 <= Laby.nb_colonne) {
         //sommet->successeur[] sommet->coordonneesCase.colonne;
     }
 }
@@ -27,25 +27,25 @@ void successeurs (Labyrinthe Laby, Sommet *sommet){
  *
  * Le graphe est un tableau de sommets de taille=(nb_lignes * nb_colonnes)
  *
- * TO DO : remplir les successeurs.
+ * @Author : Romain Daguet
  */
 void matriceToGraphe (Labyrinthe *LeLabyrinthe){
 
     int i, j, cpt=1;
-    LeLabyrinthe->graphe = (struct sommet *)malloc (sizeof(Sommet));
+    LeLabyrinthe->graphe = (Sommet *)malloc (sizeof(Sommet)*LeLabyrinthe->nb_colonne*LeLabyrinthe->nb_ligne );
     
     for (i=0; i<LeLabyrinthe->nb_ligne; i++) {
         for (j=0; j<LeLabyrinthe->nb_colonne; j++) {
-            if (i == LeLabyrinthe->depart.ligne && j == LeLabyrinthe->depart.colonne) {
-                LeLabyrinthe->graphe[0].coordonneesCase.ligne=i;
-                LeLabyrinthe->graphe[0].coordonneesCase.colonne=j;
-            } else if (i == LeLabyrinthe->arrivee.ligne && j == LeLabyrinthe->arrivee.colonne) {
-                LeLabyrinthe->graphe[sizeof(LeLabyrinthe->graphe)-1].coordonneesCase.ligne=i;
-                LeLabyrinthe->graphe[sizeof(LeLabyrinthe->graphe)-1].coordonneesCase.colonne=j;
+            if (i == LeLabyrinthe->depart.num_ligne && j == LeLabyrinthe->depart.num_col) {
+                LeLabyrinthe->graphe[0].coordonneeCase.num_ligne=i;
+                LeLabyrinthe->graphe[0].coordonneeCase.num_col=j;
+            } else if (i == LeLabyrinthe->arrivee.num_ligne && j == LeLabyrinthe->arrivee.num_col) {
+                LeLabyrinthe->graphe[sizeof(LeLabyrinthe->graphe)-1].coordonneeCase.num_ligne=i;
+                LeLabyrinthe->graphe[sizeof(LeLabyrinthe->graphe)-1].coordonneeCase.num_col=j;
             }
             else {
-                LeLabyrinthe->graphe[cpt].coordonneesCase.ligne=i;
-                LeLabyrinthe->graphe[cpt].coordonneesCase.colonne=j;
+                LeLabyrinthe->graphe[cpt].coordonneeCase.num_ligne=i;
+                LeLabyrinthe->graphe[cpt].coordonneeCase.num_col=j;
                 cpt++;
             }
         }

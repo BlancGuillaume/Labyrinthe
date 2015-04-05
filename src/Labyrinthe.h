@@ -41,7 +41,7 @@ struct labyrinthe
 
     char ** matrice;
 
-    Sommet graphe[];
+    Sommet* graphe;
 
 } Labyrinthe;
 
@@ -57,9 +57,9 @@ typedef struct problem {
 
 /********************* Fonctions liées aux files **********************/
 File initialiseFile();
-void ajouteSommetDansFile(Sommet *sommet, File *f);
+void ajouteSommetDansFile(Sommet sommet, File *f);
 Sommet retireElementFile(File * f);
-int isFileVide(File * f);
+int isFileVide(File f);
 
 
 /******************** Fonctions liées aux graphes *********************/
