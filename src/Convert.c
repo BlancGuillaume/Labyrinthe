@@ -16,10 +16,25 @@
  * @Author : Romain Daguet
 */
 void successeurs (Labyrinthe Laby, Sommet *sommet){
-    
-    if (sommet->coordonneeCase.num_col+1 <= Laby.nb_colonne) {
-        //sommet->successeur[] sommet->coordonneesCase.colonne;
-    }
+	int i;
+
+	for(i=0;i<sizeof(Laby.graphe);i++){
+
+
+		if (sommet->coordonneeCase.num_col+1 <= Laby.nb_colonne
+				&& (Laby.matrice[sommet->coordonneeCase.num_col+1][sommet->coordonneeCase.num_ligne] != '|'
+				|| Laby.matrice[sommet->coordonneeCase.num_col+1][sommet->coordonneeCase.num_ligne] != '-' )
+				&& Laby.graphe[i].coordonneeCase.num_col==sommet->coordonneeCase.num_col+1 ) {
+			sommet->successeur[1] = &Laby.graphe[i];
+		}
+		else{
+			sommet->successeur[1] = NULL;
+		}
+
+		//ifElse ˆ rŽpŽter..
+
+
+	}
 }
 
 
@@ -48,7 +63,11 @@ void matriceToGraphe (Labyrinthe *LeLabyrinthe){
                 LeLabyrinthe->graphe[cpt].coordonneeCase.num_col=j;
                 cpt++;
             }
+
         }
+    }
+    for(i=0;i<sizeof(LeLabyrinthe->graphe);i++){
+    	successeurs(*LeLabyrinthe, &LeLabyrinthe->graphe[i]);
     }
     
 }
