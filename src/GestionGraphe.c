@@ -5,6 +5,7 @@
  * Parcours tout le graphe en utilisant la méthode de largeur
  * => utilisation d'une file
  * @param leLabyrinthe contient notamment le graphe à parcourir
+ *
  * @author Guillaume Blanc
  */
 void parcoursGrapheEnLargeur(Labyrinthe leLabyrinthe)
@@ -30,19 +31,19 @@ void parcoursGrapheEnLargeur(Labyrinthe leLabyrinthe)
     marque[0] = depart ;
 
     File file = initialiseFile();
-    ajouteSommetDansFile(depart, file);
+    ajouteSommetDansFile(&depart, &file);
 
-    while (    (isFileVide(file) != OUI)
+    while (    (isFileVide(&file) != OUI)
     		&& (sortieTrouvee != OUI))
     {
-        v = retireElement(file);
+        v = retireElementFile(&file);
         if (sommetsEquals(v, sortie) == OUI)
         {
             sortieTrouvee = OUI;
         }
         else
         {
-            for (i = 1 ; i < degreExt(leLabyrinthe.graphe, v); i++)
+            for (i = 1 ; i < degreExt(v); i++)
             {
                 u = iSuccesseur(leLabyrinthe.graphe, v, i);
 
@@ -53,8 +54,8 @@ void parcoursGrapheEnLargeur(Labyrinthe leLabyrinthe)
                     // Mise à jour du nombre de sommets dans Marque
                     nbSommetDansMarque++;
 
-                    ajouteSommetDansFile(file, u);
-                    u.predecesseur = v;
+                    ajouteSommetDansFile(&u, &file);
+                    u.predecesseur = &v;
                 }
             }
         }
@@ -175,4 +176,25 @@ int sommetPresentDansMarque(Sommet marque[], Sommet aComparer,
 	}
 
 	return estPresent;
+}
+
+/**
+ * Détermine le nombre de successeurs (degreExt) du sommet passé en paramètre
+ * @param leSommet le sommet donc on doit déterminer le nombre de successeurs
+ * @return nombreDeSuccesseurs 0<= nombreDeSuccesseurs <= 4
+ *
+ * @author Guillaume Blanc
+ */
+int degreExt(Sommet leSommet)
+{
+
+	int indiceParcoursSuccesseurs = 0;
+	int nombreDeSuccesseurs = 0; // <==> degrExt
+
+	// Parcours du tableau de successeur du sommet tant qu'il y a un successeur
+	do {
+		nombreDeSuccesseurs++;
+	} while(leSommet.successeur[indiceParcoursSuccesseurs] != NULL);
+
+	return nombreDeSuccesseurs;
 }

@@ -45,18 +45,37 @@ struct labyrinthe
 
 } Labyrinthe;
 
+typedef struct problem {
+    char nom[20];
+    Coordonnee arrive, depart;
+    int nb_ligne,nb_colonne;
+    char **carte;
+} Problem;
+
+
+
 /********************* Fonctions liées aux files **********************/
 File initialiseFile();
 void ajouteSommetDansFile(Sommet *sommet, File *f);
+Sommet retireElementFile(File * f);
 int isFileVide(File * f);
+
 
 /******************** Fonctions liées aux graphes *********************/
 void parcoursGrapheEnLargeur(Labyrinthe leLabyrinthe);
 int sommetsEquals(Sommet sommet1, Sommet sommet2);
+int degreExt(Sommet leSommet);
 Sommet iSuccesseur(Sommet Graphe[], Sommet leSommet, int i);
 void ajouteSommetDansMarque(Sommet marque[], Sommet aAjouter,
 							int indiceAjout, int tailleMax );
 int sommetPresentDansMarque(Sommet marque[], Sommet aComparer,
 							int indiceMaximum, int tailleMax);
+
+
+/********************Fonctions faites par le prof **********************/
+void lire_fichier(FILE *f, Problem *p);
+void Affiche_matrice(Problem *p);
+void libere_matrice(Problem *p);
+void lire_coordonnee(FILE *f, Coordonnee *c);
 
 
