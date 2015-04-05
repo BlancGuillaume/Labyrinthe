@@ -27,7 +27,7 @@ void successeurs (Labyrinthe Laby, Sommet *sommet){
  *
  * Le graphe est un tableau de sommets de taille=(nb_lignes * nb_colonnes)
  *
- * TO DO : Malloc foireux + remplir les successeurs.
+ * TO DO : remplir les successeurs.
  */
 void matriceToGraphe (Labyrinthe *LeLabyrinthe){
 
