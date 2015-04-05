@@ -53,7 +53,7 @@ void lire_fichier(FILE *f, Problem *p) {
 		for(j=0; j< p->nb_colonne; j++) {
 			fscanf(f,"%c",&p->carte[i][j]);
 		}
-		fscanf(f,"%c",&c);  // enlève le \n
+		fscanf(f,"%c",&c);  // enlève le  \n
 	}
 }
 void Affiche_matrice(Problem *p) {
