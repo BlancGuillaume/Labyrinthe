@@ -6,7 +6,7 @@
 #define OUI 1
 
 typedef struct coordonnee {
-    unsigned int num_ligne,num_col;
+    int num_ligne,num_col;
 } Coordonnee;
 
 
