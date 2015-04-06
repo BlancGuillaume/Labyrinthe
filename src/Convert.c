@@ -9,9 +9,14 @@
 #include "Labyrinthe.h"
 
 
-/* Rempli les successeurs du sommet pass√© en parametre.
+/* Rempli les successeurs du sommet passe en parametre.
  *
- * Le graphe est un tableau de sommets de taille=(nb_lignes * nb_colonnes)
+ * Dans le sommet, le tableau successeurs, de taille 4 sera rempli ainsi :
+ * [0] : adresse du successeurs du haut
+ * [1] : adresse du successeurs du bas
+ * [2] : adresse du successeurs du gauche
+ * [3] : adresse du successeurs du droite
+ * S'il n'y a pas de successeurs, ou un mur, la case est mise à NULL
  *
  * @Author : Romain Daguet
 */
@@ -20,18 +25,53 @@ void successeurs (Labyrinthe Laby, Sommet *sommet){
 
 	for(i=0;i<sizeof(Laby.graphe);i++){
 
-
+		//colonne+1
 		if (sommet->coordonneeCase.num_col+1 <= Laby.nb_colonne
 				&& (Laby.matrice[sommet->coordonneeCase.num_col+1][sommet->coordonneeCase.num_ligne] != '|'
 				|| Laby.matrice[sommet->coordonneeCase.num_col+1][sommet->coordonneeCase.num_ligne] != '-' )
-				&& Laby.graphe[i].coordonneeCase.num_col==sommet->coordonneeCase.num_col+1 ) {
-			sommet->successeur[1] = &Laby.graphe[i];
+				&& Laby.graphe[i].coordonneeCase.num_col==sommet->coordonneeCase.num_col+1
+				&& Laby.graphe[i].coordonneeCase.num_ligne==sommet->coordonneeCase.num_ligne) {
+			sommet->successeur[0] = &Laby.graphe[i];
 		}
+		else{
+			sommet->successeur[0] = NULL;
+		}
+
+		//colonne-1
+		if (sommet->coordonneeCase.num_col-1 >= 0
+						&& (Laby.matrice[sommet->coordonneeCase.num_col-1][sommet->coordonneeCase.num_ligne] != '|'
+						|| Laby.matrice[sommet->coordonneeCase.num_col-1][sommet->coordonneeCase.num_ligne] != '-' )
+						&& Laby.graphe[i].coordonneeCase.num_col==sommet->coordonneeCase.num_col-1
+						&& Laby.graphe[i].coordonneeCase.num_ligne==sommet->coordonneeCase.num_ligne) {
+					sommet->successeur[1] = &Laby.graphe[i];
+				}
 		else{
 			sommet->successeur[1] = NULL;
 		}
 
-		//ifElse à répéter..
+		//ligne-1
+		if (sommet->coordonneeCase.num_ligne-1 >= 0
+						&& (Laby.matrice[sommet->coordonneeCase.num_col][sommet->coordonneeCase.num_ligne-1] != '|'
+						|| Laby.matrice[sommet->coordonneeCase.num_col][sommet->coordonneeCase.num_ligne-1] != '-' )
+						&& Laby.graphe[i].coordonneeCase.num_col==sommet->coordonneeCase.num_col
+						&& Laby.graphe[i].coordonneeCase.num_ligne==sommet->coordonneeCase.num_ligne-1) {
+					sommet->successeur[2] = &Laby.graphe[i];
+				}
+		else{
+			sommet->successeur[2] = NULL;
+		}
+
+		//ligne+1
+		if (sommet->coordonneeCase.num_ligne+1 <= Laby.nb_ligne
+						&& (Laby.matrice[sommet->coordonneeCase.num_col][sommet->coordonneeCase.num_ligne+1] != '|'
+						|| Laby.matrice[sommet->coordonneeCase.num_col][sommet->coordonneeCase.num_ligne+1] != '-' )
+						&& Laby.graphe[i].coordonneeCase.num_col==sommet->coordonneeCase.num_col
+						&& Laby.graphe[i].coordonneeCase.num_ligne==sommet->coordonneeCase.num_ligne+1) {
+					sommet->successeur[3] = &Laby.graphe[i];
+				}
+		else{
+			sommet->successeur[3] = NULL;
+		}
 
 
 	}
