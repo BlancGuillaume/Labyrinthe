@@ -79,4 +79,6 @@ void Affiche_matrice(Labyrinthe *lab);
 void libere_matrice(Labyrinthe *lab);
 void lire_coordonnee(FILE *f, Coordonnee *c);
 
-
+/****************** Fonctions de tests **************************/
+void testSommetsEquals();
+void testISuccesseur();

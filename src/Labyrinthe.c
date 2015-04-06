@@ -11,18 +11,29 @@
 #include "Labyrinthe.h"
 
 int main() {
+
+
+	//testSommetsEquals();
+	testISuccesseur();
+	/*
 	FILE* file;
 	file = fopen("map.txt", "r" );
 	if(file == NULL) {
-		printf("\n Erreur ouverture fichier\n");
+	printf("\n Erreur ouverture fichier\n");
 	}
 	else {
 		Labyrinthe labyrinthe;
 		lire_fichier(file,&labyrinthe);
 		Affiche_matrice(&labyrinthe);
 		// la suite est à faire ... là
+
+		//convertMatriceToGraph(labyrinthe)
+
+
+
+
 		libere_matrice(&labyrinthe);
-	}
+	}*/
 	return 0;
 }
 
@@ -36,14 +47,14 @@ void lire_fichier(FILE *f, Labyrinthe *lab) {
 	fscanf(f,"%i\n",&lab->nb_colonne);
 	lab->matrice = (char **) malloc(sizeof(char *)*lab->nb_ligne);
 	if(lab->matrice==NULL) {
-		printf("\nallocation impossible, pas assez de mémoire\n");
+		printf("\nallocation impossible, pas assez de mémoire 1\n");
 		exit (1);
 	}
 	else {
 		for (i = 0; i < lab->nb_ligne; i++) {
 			lab->matrice[i] = (char*)malloc(sizeof(char)*lab->nb_colonne);
 			if (lab->matrice[i]==NULL) {
-				printf("\nallocation impossible, pas assez de mémoire\n");
+				printf("\nallocation impossible, pas assez de mémoire 2\n");
 				exit (1);
 			}
 		}

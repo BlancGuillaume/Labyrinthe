@@ -46,6 +46,7 @@ void parcoursGrapheEnLargeur(Labyrinthe leLabyrinthe)
             for (i = 1 ; i < degreExt(v); i++)
             {
                 u = iSuccesseur(leLabyrinthe.graphe, v, i);
+                //  Affichage Intermediaire => renvoit un graphe ou une matrice a l'instant T
 
                 if (sommetPresentDansMarque(marque, u, nbSommetDansMarque,
                 		                    tailleMax) == NON)
@@ -58,8 +59,11 @@ void parcoursGrapheEnLargeur(Labyrinthe leLabyrinthe)
                     u.predecesseur = &v;
                 }
             }
+
         }
     }
+    // Affichage Final ===> Le chemin a prendre
+    // void affichageFinal(Labyrinthe labyrinthe, marque);
 }
 
 /**
@@ -74,7 +78,7 @@ int sommetsEquals(Sommet sommet1, Sommet sommet2)
 {
     return ((   (sommet1.coordonneeCase.num_ligne
              ==  sommet2.coordonneeCase.num_ligne)
-             && (sommet2.coordonneeCase.num_col
+             && (sommet1.coordonneeCase.num_col
              ==  sommet2.coordonneeCase.num_col)) ?
              OUI:
              NON);
@@ -103,6 +107,7 @@ Sommet iSuccesseur(Sommet Graphe[], Sommet leSommet, int i)
 			// Les 2 sommets sont égaux => On peut trouver le ième successeur
 			// i-1 pour gérer le fait que l'on commence à 1
 			// dans le for de parcoursGrapheEnLargeur
+			// TODO : gérer le ce cas ou dans le tableau il y a eu un NULL
 			sommetRenvoye = *Graphe[indiceParcoursGraphe].successeur[i-1];
 			sommetTrouve = OUI;
 		}
