@@ -26,7 +26,7 @@ int main() {
 	return 0;
 }
 
-void lire_fichier(File *f, Labyrinthe *lab) {
+void lire_fichier(FILE *f, Labyrinthe *lab) {
 
 	int i, j;
 	char c;
@@ -69,7 +69,7 @@ void Affiche_matrice(Labyrinthe *lab) {
 	}
 }
 
-void lire_coordonnee(File *f, Coordonnee *c) {
+void lire_coordonnee(FILE *f, Coordonnee *c) {
 	fscanf(f,"%i\t%i\n",&c->num_ligne,&c->num_col);
 }
 

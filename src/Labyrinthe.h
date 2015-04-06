@@ -74,9 +74,9 @@ int sommetPresentDansMarque(Sommet marque[], Sommet aComparer,
 
 
 /********************Fonctions faites par le prof **********************/
-void lire_fichier(File *f, Labyrinthe *lab);
+void lire_fichier(FILE *f, Labyrinthe *lab);
 void Affiche_matrice(Labyrinthe *lab);
 void libere_matrice(Labyrinthe *lab);
-void lire_coordonnee(File *f, Coordonnee *c);
+void lire_coordonnee(FILE *f, Coordonnee *c);
 
 
